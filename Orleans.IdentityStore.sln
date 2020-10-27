@@ -1,0 +1,64 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30523.141
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Orleans.IdentityStore", "src\Orleans.IdentityStore\Orleans.IdentityStore.csproj", "{1F92B6C5-FC8F-42A4-A827-0E8438B1CE52}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{FA522BA9-5B32-448A-AC5E-CACC96365466}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Orleans.IdentityStore.Tests", "tests\Orleans.IdentityStore.Tests\Orleans.IdentityStore.Tests.csproj", "{363E31F3-65AF-49DC-8808-E1F9E4D8966E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D5F6C9D0-E118-4BCD-AB1B-6435057BCD3D}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sample", "Sample", "{C407D185-35CC-423B-B6DC-06AEEC18E484}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Grains", "sample\Grains\Grains.csproj", "{6F52CF58-B886-4B42-B6CA-EFA6290EB2A8}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Interfaces", "sample\Interfaces\Interfaces.csproj", "{4696B0D5-4DC2-4FE1-BD2F-6B48C0084A80}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Web", "sample\Web\Web.csproj", "{B3D2B0DE-FCA6-4567-8638-0A0C597B4D21}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1F92B6C5-FC8F-42A4-A827-0E8438B1CE52}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1F92B6C5-FC8F-42A4-A827-0E8438B1CE52}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1F92B6C5-FC8F-42A4-A827-0E8438B1CE52}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1F92B6C5-FC8F-42A4-A827-0E8438B1CE52}.Release|Any CPU.Build.0 = Release|Any CPU
+		{363E31F3-65AF-49DC-8808-E1F9E4D8966E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{363E31F3-65AF-49DC-8808-E1F9E4D8966E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{363E31F3-65AF-49DC-8808-E1F9E4D8966E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{363E31F3-65AF-49DC-8808-E1F9E4D8966E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6F52CF58-B886-4B42-B6CA-EFA6290EB2A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6F52CF58-B886-4B42-B6CA-EFA6290EB2A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6F52CF58-B886-4B42-B6CA-EFA6290EB2A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6F52CF58-B886-4B42-B6CA-EFA6290EB2A8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4696B0D5-4DC2-4FE1-BD2F-6B48C0084A80}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4696B0D5-4DC2-4FE1-BD2F-6B48C0084A80}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4696B0D5-4DC2-4FE1-BD2F-6B48C0084A80}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4696B0D5-4DC2-4FE1-BD2F-6B48C0084A80}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B3D2B0DE-FCA6-4567-8638-0A0C597B4D21}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B3D2B0DE-FCA6-4567-8638-0A0C597B4D21}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B3D2B0DE-FCA6-4567-8638-0A0C597B4D21}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B3D2B0DE-FCA6-4567-8638-0A0C597B4D21}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{363E31F3-65AF-49DC-8808-E1F9E4D8966E} = {FA522BA9-5B32-448A-AC5E-CACC96365466}
+		{6F52CF58-B886-4B42-B6CA-EFA6290EB2A8} = {C407D185-35CC-423B-B6DC-06AEEC18E484}
+		{4696B0D5-4DC2-4FE1-BD2F-6B48C0084A80} = {C407D185-35CC-423B-B6DC-06AEEC18E484}
+		{B3D2B0DE-FCA6-4567-8638-0A0C597B4D21} = {C407D185-35CC-423B-B6DC-06AEEC18E484}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6CCA71A3-D387-4751-AB44-38D80CBD3820}
+	EndGlobalSection
+EndGlobal

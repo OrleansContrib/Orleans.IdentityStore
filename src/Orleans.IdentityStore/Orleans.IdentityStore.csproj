@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>netcoreapp3.1</TargetFramework>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<Authors>Sanjeev Manickam</Authors>
+		<Description>Uses Orleans storage to store ASP Core user accounts</Description>
+		<PackageProjectUrl>https://github.com/OrleansContrib/Orleans.IdentityStore</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/OrleansContrib/Orleans.IdentityStore.git</RepositoryUrl>
+		<Version>1.2.2</Version>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<FrameworkReference Include="Microsoft.AspNetCore.App" />
+		<PackageReference Include="Microsoft.Orleans.CodeGenerator.MSBuild" Version="3.3.0">
+			<PrivateEntities>all</PrivateEntities>
+			<IncludeEntities>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeEntities>
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="Microsoft.Orleans.Core" Version="3.3.0" />
+		<PackageReference Include="Microsoft.Orleans.OrleansProviders" Version="3.3.0" />
+		<PackageReference Include="Microsoft.Orleans.Runtime.Abstractions" Version="3.3.0" />
+	</ItemGroup>
+</Project>
