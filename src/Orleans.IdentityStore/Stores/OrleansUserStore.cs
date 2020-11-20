@@ -196,9 +196,11 @@ namespace Orleans.IdentityStore.Stores
             ThrowIfDisposed();
             cancellationToken.ThrowIfCancellationRequested();
 
-            var id = await _client.GetGrain<IIdentityUserByEmailGrain>(normalizedEmail).GetId();
-            if (id != null)
-                return await UserGrain(id.Value).Get();
+            var grain = await _client.Find<IIdentityUserGrain<TUser, TRole>>(OrleansIdentityConstants.EmailLookup, normalizedEmail);
+            if (grain != null)
+            {
+                return await grain.Get();
+            }
 
             return null;
         }
@@ -240,9 +242,11 @@ namespace Orleans.IdentityStore.Stores
             ThrowIfDisposed();
             cancellationToken.ThrowIfCancellationRequested();
 
-            var id = await _client.GetGrain<IIdentityUserByNameGrain>(normalizedUserName).GetId();
-            if (id != null)
-                return await UserGrain(id.Value).Get();
+            var grain = await _client.Find<IIdentityUserGrain<TUser, TRole>>(OrleansIdentityConstants.UsernameLookup, normalizedUserName);
+            if (grain != null)
+            {
+                return await grain.Get();
+            }
 
             return null;
         }
@@ -628,10 +632,10 @@ namespace Orleans.IdentityStore.Stores
         /// <returns>The user login if it exists.</returns>
         protected override async Task<IdentityUserLogin<Guid>> FindUserLoginAsync(string loginProvider, string providerKey, CancellationToken cancellationToken)
         {
-            var userId = await _client.GetGrain<IIdentityUserByLoginGrain>(loginProvider + providerKey).GetId();
-            if (userId != null)
+            var grain = await _client.Find<IIdentityUserGrain<TUser, TRole>>(loginProvider, providerKey);
+            if (grain != null)
             {
-                return await UserGrain(userId.Value).GetLogin(loginProvider, providerKey);
+                return await grain.GetLogin(loginProvider, providerKey);
             }
 
             return null;

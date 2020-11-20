@@ -59,7 +59,7 @@ namespace ASPNetCoreHostedServices
                     // Add identity
                     services.AddDefaultIdentity<IdentityUser<Guid>>()
                     // User orleans as the store
-                    .AddOrleansStores();
+                    .AddOrleansStore();
                     services.AddRazorPages();
                 })
             .RunConsoleAsync();

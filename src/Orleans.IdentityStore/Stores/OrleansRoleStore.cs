@@ -153,11 +153,11 @@ namespace Orleans.IdentityStore.Stores
             cancellationToken.ThrowIfCancellationRequested();
             ThrowIfDisposed();
 
-            var id = await _client.GetGrain<IIdentityRoleByNameGrain>(normalizedRoleName).GetId();
+            var grain = await _client.Find<IIdentityRoleGrain<TUser, TRole>>(OrleansIdentityConstants.RoleLookup, normalizedRoleName);
 
-            if (id != null)
+            if (grain != null)
             {
-                return await _client.GetGrain<IIdentityRoleGrain<TUser, TRole>>(id.Value).Get();
+                return await grain.Get();
             }
 
             return null;
