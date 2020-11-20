@@ -23,7 +23,7 @@ Asp Core Startup:
 services
     .AddDefaultIdentity<IdentityUser<Guid>>()
     // User orleans as the store
-    .AddOrleansStores<IdentityUser<Guid>, IdentityRole<Guid>>();
+    .AddOrleansStore<IdentityUser<Guid>, IdentityRole<Guid>>();
 ```
 
 ### User Class

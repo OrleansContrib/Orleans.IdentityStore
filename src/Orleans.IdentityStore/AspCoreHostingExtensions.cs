@@ -13,16 +13,8 @@ namespace Microsoft.Extensions.DependencyInjection
         /// Use orleans as your user store
         /// </summary>
         /// <param name="builder">Identity builder</param>
-        public static IdentityBuilder AddOrleansStores(this IdentityBuilder builder)
+        public static IdentityBuilder AddOrleansStore(this IdentityBuilder builder)
         {
-            //JsonConvert.DefaultSettings = () =>
-            //{
-            //    return new JsonSerializerSettings()
-            //    {
-            //        Converters = new List<JsonConverter>() { new JsonClaimConverter(), new JsonClaimsPrincipalConverter(), new JsonClaimsIdentityConverter() }
-            //    };
-            //};
-
             var roleType = builder.RoleType ?? typeof(IdentityRole<Guid>);
 
             builder.Services.AddTransient(

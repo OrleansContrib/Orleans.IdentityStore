@@ -36,7 +36,7 @@ namespace Orleans.Hosting
             //};
 
             return builder
-                .ConfigureApplicationParts(parts => parts.AddApplicationPart(typeof(IdentityByStringGrain).Assembly).WithReferences());
+                .ConfigureApplicationParts(parts => parts.AddApplicationPart(typeof(ILookupGrain).Assembly).WithReferences());
         }
 
         /// <summary>
@@ -65,7 +65,7 @@ namespace Orleans.Hosting
             //};
 
             return builder
-                .ConfigureApplicationParts(parts => parts.AddApplicationPart(typeof(IdentityByStringGrain).Assembly).WithReferences());
+                .ConfigureApplicationParts(parts => parts.AddApplicationPart(typeof(ILookupGrain).Assembly).WithReferences());
         }
     }
 }

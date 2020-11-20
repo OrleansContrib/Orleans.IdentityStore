@@ -7,9 +7,13 @@
 		<Description>Uses Orleans storage to store ASP Core user accounts</Description>
 		<PackageProjectUrl>https://github.com/OrleansContrib/Orleans.IdentityStore</PackageProjectUrl>
 		<RepositoryUrl>https://github.com/OrleansContrib/Orleans.IdentityStore.git</RepositoryUrl>
-		<Version>1.2.2</Version>
+		<Version>2.0.0</Version>
+		<PackageTags>Orleans User-Store</PackageTags>
 	</PropertyGroup>
 
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+		<DocumentationFile>C:\dev\github\Orleans.IdentityStore\src\Orleans.IdentityStore\Orleans.IdentityStore.xml</DocumentationFile>
+	</PropertyGroup>
 	<ItemGroup>
 		<FrameworkReference Include="Microsoft.AspNetCore.App" />
 		<PackageReference Include="Microsoft.Orleans.CodeGenerator.MSBuild" Version="3.3.0">

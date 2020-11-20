@@ -130,11 +130,10 @@ namespace Orleans.IdentityStore.Grains
             // Normalize name
             role.NormalizedName = _normalizer.NormalizeName(role.Name);
 
-            if ((await GrainFactory.GetGrain<IIdentityRoleByNameGrain>(role.NormalizedName).GetId()) != null)
+            if (!await GrainFactory.AddOrUpdateToLookup(OrleansIdentityConstants.RoleLookup, role.NormalizedName, _id))
                 return IdentityResult.Failed();
 
             _data.State.Role = role;
-            await GrainFactory.GetGrain<IIdentityRoleByNameGrain>(role.NormalizedName).SetId(role.Id);
             await _data.WriteStateAsync();
 
             return IdentityResult.Success;
@@ -145,7 +144,7 @@ namespace Orleans.IdentityStore.Grains
             if (_data.State.Role == null)
                 return IdentityResult.Failed();
 
-            await GrainFactory.GetGrain<IIdentityRoleByNameGrain>(_data.State.Role.NormalizedName).ClearId();
+            await GrainFactory.RemoveFromLookup(OrleansIdentityConstants.RoleLookup, _data.State.Role.NormalizedName);
             await Task.WhenAll(_data.State.Users.Select(u => GrainFactory.GetGrain<IIdentityUserGrain<TUser, TRole>>(u).RemoveRole(_id, false)));
             await _data.ClearStateAsync();
 
@@ -210,10 +209,12 @@ namespace Orleans.IdentityStore.Grains
                 return IdentityResult.Failed();
 
             // Normalize name
-            role.NormalizedName = _normalizer.NormalizeName(role.Name);
+            var newRoleName = _normalizer.NormalizeName(role.Name);
 
-            if ((await GrainFactory.GetGrain<IIdentityRoleByNameGrain>(role.NormalizedName).GetId()) != null)
+            if (newRoleName != _data.State.Role.NormalizedName && !await GrainFactory.AddOrUpdateToLookup(OrleansIdentityConstants.RoleLookup, newRoleName, _id))
+            {
                 return IdentityResult.Failed();
+            }
 
             _data.State.Role = role;
             await _data.WriteStateAsync();

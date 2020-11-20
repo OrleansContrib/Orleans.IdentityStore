@@ -42,12 +42,13 @@ namespace Orleans.IdentityStore.Tests
                 NormalizedName = roleId.ToString()
             }, CancellationToken.None);
 
-            await store.CreateAsync(user);
+            var createResult = await store.CreateAsync(user);
             await store.AddToRoleAsync(user, normalizer.NormalizeName(roleId.ToString()));
 
             var roleFromUser = await store.GetRolesAsync(user);
             var userInRole = await store.GetUsersInRoleAsync(normalizer.NormalizeName(roleId.ToString()));
 
+            Assert.True(createResult.Succeeded);
             Assert.Single(roleFromUser);
             Assert.Single(userInRole);
         }
