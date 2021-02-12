@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Identity;
 using Orleans.IdentityStore.Stores;
 using Orleans.TestingHost;
 using System;
+using System.Security.Claims;
 using System.Threading;
 using System.Threading.Tasks;
 using Xunit;
@@ -51,6 +52,53 @@ namespace Orleans.IdentityStore.Tests
             Assert.True(createResult.Succeeded);
             Assert.Single(roleFromUser);
             Assert.Single(userInRole);
+        }
+
+        [Fact]
+        public async Task CanAddClaim()
+        {
+            var userId = Guid.NewGuid();
+            var username = $"{userId}";
+            var user = new IdentityUser<Guid>
+            {
+                Id = userId,
+                NormalizedEmail = username + "@test.com",
+                Email = username + "@test.com",
+                UserName = username,
+                NormalizedUserName = username
+            };
+
+            var store = GetSubject(out _);
+            var createResult = await store.CreateAsync(user);
+            await store.AddClaimsAsync(user, new[] { new Claim("a", "a"), new Claim("b", "b") });
+            var claims = await store.GetClaimsAsync(user);
+
+            Assert.True(createResult.Succeeded);
+            Assert.Equal(2, claims.Count);
+        }
+
+        [Fact]
+        public async Task CanRemoveClaim()
+        {
+            var userId = Guid.NewGuid();
+            var username = $"{userId}";
+            var user = new IdentityUser<Guid>
+            {
+                Id = userId,
+                NormalizedEmail = username + "@test.com",
+                Email = username + "@test.com",
+                UserName = username,
+                NormalizedUserName = username
+            };
+
+            var store = GetSubject(out _);
+            var createResult = await store.CreateAsync(user);
+            await store.AddClaimsAsync(user, new[] { new Claim("a", "a"), new Claim("b", "b") });
+            await store.RemoveClaimsAsync(user, new[] { new Claim("a", "a") });
+            var claims = await store.GetClaimsAsync(user);
+
+            Assert.True(createResult.Succeeded);
+            Assert.Single(claims);
         }
 
         [Fact]

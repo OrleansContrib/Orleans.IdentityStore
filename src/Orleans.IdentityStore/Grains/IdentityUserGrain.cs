@@ -338,7 +338,7 @@ namespace Orleans.IdentityStore.Grains
             var tasks = new List<Task>();
             foreach (var c in claims)
             {
-                foreach (var m in _data.State.Claims.Where(uc => uc.ClaimValue == c.Value && uc.ClaimType == c.Type))
+                foreach (var m in _data.State.Claims.Where(uc => uc.ClaimValue == c.Value && uc.ClaimType == c.Type).ToList())
                 {
                     writeRequired = true;
                     _data.State.Claims.Remove(m);
