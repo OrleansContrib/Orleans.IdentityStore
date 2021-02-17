@@ -18,8 +18,12 @@ namespace Microsoft.Extensions.DependencyInjection
             var roleType = builder.RoleType ?? typeof(IdentityRole<Guid>);
 
             builder.Services.AddTransient(
-                    typeof(IRoleClaimStore<>).MakeGenericType(roleType),
+                    typeof(IRoleStore<>).MakeGenericType(roleType),
                     typeof(OrleansRoleStore<,>).MakeGenericType(builder.UserType, roleType));
+
+            builder.Services.AddTransient(
+                typeof(IRoleClaimStore<>).MakeGenericType(roleType),
+                typeof(OrleansRoleStore<,>).MakeGenericType(builder.UserType, roleType));
 
             builder.Services.AddTransient(
             typeof(IUserStore<>).MakeGenericType(builder.UserType),
