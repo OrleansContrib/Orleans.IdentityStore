@@ -176,8 +176,12 @@ namespace Orleans.IdentityStore.Grains
                 var tasks = new List<Task>();
                 foreach (var c in claims)
                 {
-                    _data.State.Claims.Add(c);
-                    tasks.Add(GrainFactory.GetGrain(c).AddUserId(_id));
+                    // avoid duplicate claims
+                    if (!_data.State.Claims.Any(x => x.ClaimType == c.ClaimType && x.ClaimValue == c.ClaimValue))
+                    {
+                        _data.State.Claims.Add(c);
+                        tasks.Add(GrainFactory.GetGrain(c).AddUserId(_id));
+                    }
                 }
                 tasks.Add(_data.WriteStateAsync());
                 return Task.WhenAll(tasks);
