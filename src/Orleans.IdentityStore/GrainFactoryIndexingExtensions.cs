@@ -40,6 +40,24 @@ namespace Orleans.IdentityStore
             return default;
         }
 
+        public static async IAsyncEnumerable<TGrain> Search<TGrain>(this IGrainFactory factory, string lookupName, Func<string, bool> func) where TGrain : IGrain
+        {
+            for (var i = 0; i < BucketCount; i++)
+            {
+                var bucket = await factory.GetGrain<ILookupGrain>($"{lookupName}/{i}").GetAll();
+                if (bucket != null)
+                {
+                    foreach (var e in bucket)
+                    {
+                        if (func(e.Key))
+                        {
+                            yield return (TGrain)factory.GetGrain(typeof(TGrain), e.Value);
+                        }
+                    }
+                }
+            }
+        }
+
         internal static int GetBucket(string text)
         {
             unchecked
