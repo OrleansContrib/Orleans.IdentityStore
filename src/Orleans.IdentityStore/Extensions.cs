@@ -1,9 +1,10 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Orleans.IdentityStore;
-using Orleans.IdentityStore.Grains;
-using System;
+﻿using System;
+using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
+using Orleans.IdentityStore;
+using Orleans.IdentityStore.Grains;
 
 namespace Orleans
 {
@@ -49,6 +50,19 @@ namespace Orleans
         public static IIdentityRoleGrain<IdentityUser<Guid>, IdentityRole<Guid>> Role(this IGrainFactory factory, Guid id)
         {
             return factory.GetGrain<IIdentityRoleGrain<IdentityUser<Guid>, IdentityRole<Guid>>>(id);
+        }
+
+        /// <summary>
+        /// Searches through all user
+        /// </summary>
+        /// <typeparam name="TUser"></typeparam>
+        /// <param name="factory"></param>
+        /// <param name="func"></param>
+        /// <returns></returns>
+        public static IAsyncEnumerable<IIdentityUserGrain<TUser, IdentityRole<Guid>>> SearchByUsername<TUser>(this IGrainFactory factory, Func<string, bool> func)
+            where TUser : IdentityUser<Guid>
+        {
+            return factory.Search<IIdentityUserGrain<TUser, IdentityRole<Guid>>>(OrleansIdentityConstants.UsernameLookup, func);
         }
 
         /// <summary>
